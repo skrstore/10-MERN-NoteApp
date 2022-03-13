@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./Todo.scss";
+import "./Todo.css";
 import TodoBox from "./TodoBox";
 
 export default class TodoBoxContainer extends Component {

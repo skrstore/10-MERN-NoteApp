@@ -4,7 +4,7 @@ import TodoList from "../common/TodoList";
 import InputArea from "../common/InputArea";
 // import TodoBoxContainer from "../common/TodoBoxContainer";
 
-import "./view.scss";
+import "./view.css";
 
 export default class Todo extends Component {
   constructor(props) {

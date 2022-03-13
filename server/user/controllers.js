@@ -22,10 +22,10 @@ module.exports.register = async (req, res) => {
 
     let users = [];
     users = await User.find({ username });
-    if (users.length !== 0) throw new Error("Username already exists");
+    if (users.length !== 0) throw new Error("Username already registered");
 
     users = await User.find({ email });
-    if (users.length !== 0) throw new Error("Email already exists");
+    if (users.length !== 0) throw new Error("Email already registered");
 
     await User.create({ username, email, password });
 

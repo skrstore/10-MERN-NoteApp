@@ -1,11 +1,11 @@
 .todoBoxContainer {
-  background-color: #fff;
-  // padding: 1em;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  height: 100%;
-  > div {
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 100%;
+}
+.todoBoxContainer > div {
     background-color: #f5fff5;
     border-radius: 10px;
     padding: 0.3em 0.1em 0.3em 0.5em;
@@ -18,22 +18,20 @@
     min-height: 5em;
     max-height: 10em;
     transition: 0.2s ease-in;
-    &:hover {
-      box-shadow: 0 0 10px #2bff2b;
-    }
-  }
 }
-
+.todoBoxContainer > div:hover {
+    box-shadow: 0 0 10px #2bff2b;
+}
 .todoList {
-  overflow-y: auto;
-  height: 100%;
-  ul li {
-    background-color: rgb(245, 245, 245);
+    overflow-y: auto;
+    height: 100%;
+}
+.todoList ul li {
+    background-color: #f5f5f5;
     transition: 0.1s ease-in;
     padding: 1em;
     cursor: pointer;
-    &:hover {
-      background-color: rgb(207, 207, 207);
-    }
-  }
+}
+.todoList ul li:hover {
+    background-color: #cfcfcf;
 }

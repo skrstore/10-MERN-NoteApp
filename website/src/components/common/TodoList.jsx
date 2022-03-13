@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./Todo.scss";
+import "./Todo.css";
 
 export default class TodoList extends Component {
   render() {
