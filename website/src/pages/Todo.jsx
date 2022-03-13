@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-import { deleteRequest, get, patch, post } from "../../services/requests";
+import { deleteRequest, get, patch, post } from "../services/requests";
 
-import TodoList from "../common/TodoList";
-import InputArea from "../common/InputArea";
+import TodoList from "../components/TodoList";
+import InputArea from "../components/InputArea";
 
 import "./view.css";
 

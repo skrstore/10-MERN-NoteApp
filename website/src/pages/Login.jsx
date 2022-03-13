@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { post } from "./../../services/requests";
+import { post } from "../services/requests";
 
 export default class Login extends Component {
     constructor(props) {
