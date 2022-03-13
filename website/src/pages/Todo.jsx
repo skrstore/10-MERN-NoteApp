@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import { deleteRequest, get, patch, post } from "../services/requests";
 
-import TodoList from "../components/TodoList";
+import DataList from "../components/DataList";
 import InputArea from "../components/InputArea";
 
 export default class Todo extends Component {
@@ -11,7 +11,7 @@ export default class Todo extends Component {
         this.state = {
             todoList: [],
             activeTodo: null,
-            isNewTodo: false
+            isNewTodo: false,
         };
         this.token = localStorage.getItem("auth_token");
     }
@@ -23,7 +23,7 @@ export default class Todo extends Component {
     getTodosFromServer = async () => {
         try {
             const result = await get("todo", {
-                Authorization: "Bearer " + this.token
+                Authorization: "Bearer " + this.token,
             });
             this.setState({ todoList: result.data });
         } catch (error) {
@@ -38,7 +38,7 @@ export default class Todo extends Component {
             const result = await deleteRequest(
                 "todo/" + String(activeTodo._id),
                 {
-                    Authorization: "Bearer " + this.token
+                    Authorization: "Bearer " + this.token,
                 }
             );
 
@@ -62,7 +62,7 @@ export default class Todo extends Component {
                 "todo",
                 { title: activeTodo.title, todo: activeTodo.todo },
                 {
-                    Authorization: "Bearer " + this.token
+                    Authorization: "Bearer " + this.token,
                 }
             );
 
@@ -83,7 +83,7 @@ export default class Todo extends Component {
                 "todo/" + String(activeTodo._id),
                 { title: activeTodo.title, todo: activeTodo.todo },
                 {
-                    Authorization: "Bearer " + this.token
+                    Authorization: "Bearer " + this.token,
                 }
             );
             console.log(result);
@@ -95,12 +95,12 @@ export default class Todo extends Component {
         }
     };
 
-    setActiveTodo = async id => {
+    setActiveTodo = async (id) => {
         try {
             this.setState({ isNewTodo: false });
 
             const result = await get("todo/" + String(id), {
-                Authorization: "Bearer " + this.token
+                Authorization: "Bearer " + this.token,
             });
 
             console.log("RE ", result);
@@ -113,7 +113,7 @@ export default class Todo extends Component {
 
     handleTodoValueChange = (e, field) => {
         this.setState({
-            activeTodo: { ...this.state.activeTodo, [field]: e.target.value }
+            activeTodo: { ...this.state.activeTodo, [field]: e.target.value },
         });
     };
 
@@ -121,9 +121,9 @@ export default class Todo extends Component {
         return (
             <div className="row p-0 m-0 h-100">
                 <div className="col-4 p-0 m-0 h-100 bg-white">
-                    <TodoList
-                        Todos={this.state.todoList}
-                        setActiveTodo={this.setActiveTodo}
+                    <DataList
+                        data={this.state.todoList}
+                        setActive={this.setActiveTodo}
                     />
                 </div>
                 <div className="col-8 row justify-content-center text-center align-items-center">

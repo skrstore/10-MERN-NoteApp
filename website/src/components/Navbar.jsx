@@ -14,9 +14,7 @@ class Navbar extends Component {
                 className="navbar navbar-expand navbar-dark bg-dark"
                 style={this.props.style}
             >
-                <span className="navbar-brand mb-0">
-                    Todo<b>APP</b>
-                </span>
+                <span className="navbar-brand mb-0">{document.title}</span>
 
                 {isLogin && (
                     <div className="navbar-nav ml-auto">
