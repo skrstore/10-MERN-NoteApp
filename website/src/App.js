@@ -1,10 +1,27 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Redirect
+} from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Todo from "./pages/Todo";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+
+const PrivateRoute = ({ children, ...rest }) => {
+    const isLogin = !!localStorage.getItem("auth_token");
+    return (
+        <Route
+            {...rest}
+            render={() => {
+                return isLogin ? children : <Redirect to="/login" />;
+            }}
+        />
+    );
+};
 
 export default class App extends Component {
     render() {
@@ -16,9 +33,11 @@ export default class App extends Component {
                     style={{ height: "90vh" }}
                 >
                     <Switch>
-                        <Route exact path="/" component={Todo} />
-                        <Route path="/login" component={Login} />
-                        <Route path="/register" component={Register} />
+                        <PrivateRoute exact path="/">
+                            <Todo />
+                        </PrivateRoute>
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/register" component={Register} />
                     </Switch>
                 </main>
             </Router>
