@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
+import InputField from "./../components/InputField";
+
 import { post } from "../services/requests";
 
 export default class Login extends Component {
@@ -22,7 +24,7 @@ export default class Login extends Component {
         this.sendLoginData();
     };
 
-    sendLoginData = async e => {
+    sendLoginData = async () => {
         const result = await post("user/login", this.state);
 
         console.log("RES ", result);
@@ -46,40 +48,20 @@ export default class Login extends Component {
                         onSubmit={this.handleSubmit}
                         className="mt-4 col-12 col-md-10 col-lg-7"
                     >
-                        <div className="form-group row align-items-center">
-                            <label
-                                htmlFor="email"
-                                className="pl-0 col-4 m-0 font-weight-bold"
-                            >
-                                Email
-                            </label>
-                            <input
-                                type="email"
-                                id="email"
-                                className="form-control col-8"
-                                value={this.state.email}
-                                onChange={e =>
-                                    this.handleInputChange(e, "email")
-                                }
-                            />
-                        </div>
-                        <div className="form-group row align-items-center">
-                            <label
-                                htmlFor="password"
-                                className="pl-0 col-4 m-0 font-weight-bold"
-                            >
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                className="form-control col-8"
-                                value={this.state.password}
-                                onChange={e =>
-                                    this.handleInputChange(e, "password")
-                                }
-                            />
-                        </div>
+                        <InputField
+                            name="email"
+                            value={this.state.email}
+                            onChange={e => this.handleInputChange(e, "email")}
+                            type="email"
+                        />
+                        <InputField
+                            name="password"
+                            value={this.state.password}
+                            onChange={e =>
+                                this.handleInputChange(e, "password")
+                            }
+                            type="password"
+                        />
                         <div className="form-group row align-items-center justify-content-around mt-5">
                             <button
                                 className="btn btn-outline-success"

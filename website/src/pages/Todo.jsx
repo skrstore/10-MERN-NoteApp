@@ -5,15 +5,13 @@ import { deleteRequest, get, patch, post } from "../services/requests";
 import TodoList from "../components/TodoList";
 import InputArea from "../components/InputArea";
 
-import "./view.css";
-
 export default class Todo extends Component {
     constructor(props) {
         super(props);
         this.state = {
             todoList: [],
             activeTodo: null,
-            isNewTodo: false,
+            isNewTodo: false
         };
         this.token = localStorage.getItem("auth_token");
     }
@@ -25,8 +23,8 @@ export default class Todo extends Component {
     getTodosFromServer = async () => {
         try {
             const result = await get("todo", {
-                Authorization: "Bearer " + this.token,
-            })
+                Authorization: "Bearer " + this.token
+            });
             this.setState({ todoList: result.data });
         } catch (error) {
             this.props.history.push("/login");
@@ -37,9 +35,12 @@ export default class Todo extends Component {
         try {
             const { activeTodo } = this.state;
 
-            const result = await deleteRequest("todo/" + String(activeTodo._id), {
-                Authorization: "Bearer " + this.token,
-            })
+            const result = await deleteRequest(
+                "todo/" + String(activeTodo._id),
+                {
+                    Authorization: "Bearer " + this.token
+                }
+            );
 
             console.log(result.data);
             this.getTodosFromServer();
@@ -57,9 +58,13 @@ export default class Todo extends Component {
         try {
             const { activeTodo } = this.state;
 
-            const result = await post("todo", { title: activeTodo.title, todo: activeTodo.todo }, {
-                Authorization: "Bearer " + this.token,
-            })
+            const result = await post(
+                "todo",
+                { title: activeTodo.title, todo: activeTodo.todo },
+                {
+                    Authorization: "Bearer " + this.token
+                }
+            );
 
             console.log(result);
             this.getTodosFromServer();
@@ -74,9 +79,13 @@ export default class Todo extends Component {
         try {
             const { activeTodo } = this.state;
 
-            const result = await patch("todo/" + String(activeTodo._id), { title: activeTodo.title, todo: activeTodo.todo }, {
-                Authorization: "Bearer " + this.token,
-            })
+            const result = await patch(
+                "todo/" + String(activeTodo._id),
+                { title: activeTodo.title, todo: activeTodo.todo },
+                {
+                    Authorization: "Bearer " + this.token
+                }
+            );
             console.log(result);
 
             this.getTodosFromServer();
@@ -86,23 +95,25 @@ export default class Todo extends Component {
         }
     };
 
-    setActiveTodo = async (id) => {
+    setActiveTodo = async id => {
         try {
             this.setState({ isNewTodo: false });
 
-            const result = await get('todo/' + String(id), { Authorization: "Bearer " + this.token })
+            const result = await get("todo/" + String(id), {
+                Authorization: "Bearer " + this.token
+            });
 
             console.log("RE ", result);
 
             if (!result.error) {
                 this.setState({ activeTodo: result.data });
             }
-        } catch (error) { }
+        } catch (error) {}
     };
 
     handleTodoValueChange = (e, field) => {
         this.setState({
-            activeTodo: { ...this.state.activeTodo, [field]: e.target.value },
+            activeTodo: { ...this.state.activeTodo, [field]: e.target.value }
         });
     };
 
@@ -130,7 +141,10 @@ export default class Todo extends Component {
                     )}
                 </div>
                 <div className="addNewBtnContainer">
-                    <button className="btn bg-white" onClick={this.handleTodoAddNew}>
+                    <button
+                        className="btn bg-white"
+                        onClick={this.handleTodoAddNew}
+                    >
                         Add New
                     </button>
                 </div>
