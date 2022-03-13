@@ -58,6 +58,6 @@ module.exports.login = async (req, res) => {
       res.status(400).send({ error: "Invalid Login Crendicals" });
     }
   } catch (error) {
-    res.status(400).send({ errro: error.message });
+    res.status(400).send({ error: error.message });
   }
 };

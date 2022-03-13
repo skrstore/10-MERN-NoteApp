@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import Axios from "axios";
 import { Link } from "react-router-dom";
 
-export default class Register extends Component {
-  baseURL = "http://localhost:5000/api/user/";
+import { post } from "../../services/requests";
 
+export default class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,9 +32,9 @@ export default class Register extends Component {
   };
 
   sendRegisterData = async () => {
-    const result = await Axios.post(this.baseURL + "register", this.state);
-    console.log(result.data);
-    if (!result.data.error) {
+    const result = await post("user/register", this.state);
+    console.log("R : ", result);
+    if (!result.error) {
       this.props.history.push("/login");
     }
   };
