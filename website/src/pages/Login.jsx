@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 import InputField from "./../components/InputField";
 
-import { post } from "../services/requests";
+import { get, post } from "../services/requests";
 
 export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
             email: "",
-            password: ""
+            password: "",
         };
     }
 
@@ -18,7 +18,7 @@ export default class Login extends Component {
         this.setState({ [name]: e.target.value });
     };
 
-    handleSubmit = e => {
+    handleSubmit = (e) => {
         e.preventDefault();
         console.log(this.state);
         this.sendLoginData();
@@ -27,10 +27,15 @@ export default class Login extends Component {
     sendLoginData = async () => {
         const result = await post("user/login", this.state);
 
-        console.log("RES ", result);
         if (!result.error) {
             const token = result.data.token;
             localStorage.setItem("auth_token", token);
+
+            const result2 = await get("user", {
+                Authorization: "Bearer " + token,
+            });
+
+            localStorage.setItem("username", result2.data.username);
             this.props.history.push("/");
         } else {
             console.log("ERROR in login");
@@ -51,13 +56,13 @@ export default class Login extends Component {
                         <InputField
                             name="email"
                             value={this.state.email}
-                            onChange={e => this.handleInputChange(e, "email")}
+                            onChange={(e) => this.handleInputChange(e, "email")}
                             type="email"
                         />
                         <InputField
                             name="password"
                             value={this.state.password}
-                            onChange={e =>
+                            onChange={(e) =>
                                 this.handleInputChange(e, "password")
                             }
                             type="password"

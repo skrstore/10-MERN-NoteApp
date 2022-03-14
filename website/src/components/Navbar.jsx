@@ -4,10 +4,12 @@ import { withRouter } from "react-router-dom";
 class Navbar extends Component {
     handleLogout = () => {
         localStorage.removeItem("auth_token");
+        localStorage.removeItem("username");
         this.props.history.push("/login");
     };
 
     render() {
+        const username = localStorage.getItem("username");
         const isLogin = !!localStorage.getItem("auth_token");
         return (
             <nav
@@ -23,7 +25,7 @@ class Navbar extends Component {
                                 className="btn btn-outline-danger"
                                 onClick={this.handleLogout}
                             >
-                                Logout
+                                Logout - {username}
                             </button>
                         </div>
                     </div>
