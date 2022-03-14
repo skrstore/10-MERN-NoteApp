@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const express = require("express");
 const cors = require("cors");
 
-const checkAuth = require("./middlewares/checkAuth");
+const checkAuth = require("./middleware/middleware");
 
 const app = express();
 app.use(cors());
