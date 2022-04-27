@@ -1,13 +1,6 @@
-# 10-MERN-TodoApp
+# MERN-TodoApp
 
-## Technologies
-
-- ReactJS
-- ExpressJS
-- MongoDB
-- Style - Scss
-
-## Usage
+## Notes
 
 ```sh
 cd website
