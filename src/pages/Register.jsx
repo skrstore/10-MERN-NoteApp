@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import InputField from "./../components/InputField";
-
-import { post } from "../services/requests";
+import { registerAPI } from "../services/apis";
 
 export default class Register extends Component {
     constructor(props) {
@@ -11,34 +10,30 @@ export default class Register extends Component {
         this.state = {
             username: "",
             email: "",
-            password: ""
+            password: "",
         };
     }
 
-    handleInputChange = (e, name) => {
-        this.setState({ [name]: e.target.value });
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     };
 
-    handleSubmit = e => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state);
-        this.sendRegisterData();
+        const result = await registerAPI(this.state);
+
+        if (!result.error) {
+            this.props.history.push("/login");
+        }
     };
 
     handleReset = () => {
         this.setState({
             username: "",
             email: "",
-            password: ""
+            password: "",
         });
-    };
-
-    sendRegisterData = async () => {
-        const result = await post("user/register", this.state);
-        console.log("R : ", result);
-        if (!result.error) {
-            this.props.history.push("/login");
-        }
     };
 
     render() {
@@ -56,22 +51,18 @@ export default class Register extends Component {
                         <InputField
                             name="username"
                             value={this.state.username}
-                            onChange={e =>
-                                this.handleInputChange(e, "username")
-                            }
+                            onChange={this.handleInputChange}
                         />
                         <InputField
                             name="email"
                             value={this.state.email}
-                            onChange={e => this.handleInputChange(e, "email")}
+                            onChange={this.handleInputChange}
                             type="email"
                         />
                         <InputField
                             name="password"
                             value={this.state.password}
-                            onChange={e =>
-                                this.handleInputChange(e, "password")
-                            }
+                            onChange={this.handleInputChange}
                             type="password"
                         />
                         <div className="form-group row align-items-center justify-content-around mt-5">

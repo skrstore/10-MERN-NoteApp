@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import InputField from "./../components/InputField";
-
-import { get, post } from "../services/requests";
+import { getUserDetailAPI, loginAPI } from "../services/apis";
 
 export default class Login extends Component {
     constructor(props) {
@@ -14,28 +13,17 @@ export default class Login extends Component {
         };
     }
 
-    handleInputChange = (e, name) => {
-        this.setState({ [name]: e.target.value });
+    handleInputChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     };
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(this.state);
-        this.sendLoginData();
-    };
-
-    sendLoginData = async () => {
-        const result = await post("user/login", this.state);
+        const result = await loginAPI(this.state);
 
         if (!result.error) {
-            const token = result.data.token;
-            localStorage.setItem("auth_token", token);
-
-            const result2 = await get("user", {
-                Authorization: "Bearer " + token,
-            });
-
-            localStorage.setItem("username", result2.data.username);
+            await getUserDetailAPI();
             this.props.history.push("/");
         } else {
             console.log("ERROR in login");
@@ -56,15 +44,13 @@ export default class Login extends Component {
                         <InputField
                             name="email"
                             value={this.state.email}
-                            onChange={(e) => this.handleInputChange(e, "email")}
+                            onChange={this.handleInputChange}
                             type="email"
                         />
                         <InputField
                             name="password"
                             value={this.state.password}
-                            onChange={(e) =>
-                                this.handleInputChange(e, "password")
-                            }
+                            onChange={this.handleInputChange}
                             type="password"
                         />
                         <div className="form-group row align-items-center justify-content-around mt-5">

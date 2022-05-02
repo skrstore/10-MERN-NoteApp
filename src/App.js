@@ -3,11 +3,11 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Redirect
+    Redirect,
 } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import Todo from "./pages/Todo";
+import Notes from "./pages/Notes";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
@@ -27,14 +27,11 @@ export default class App extends Component {
     render() {
         return (
             <Router>
-                <Navbar style={{ height: "10vh" }} />
-                <main
-                    className="container-fluid p-0 bg-primary"
-                    style={{ height: "90vh" }}
-                >
+                <Navbar style={{ height: "4rem" }} />
+                <main className="container-fluid">
                     <Switch>
                         <PrivateRoute exact path="/">
-                            <Todo />
+                            <Notes />
                         </PrivateRoute>
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />

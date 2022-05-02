@@ -1,69 +1,36 @@
-import { BASE_URL } from "../constants";
+import { SERVER_URL } from "../constants";
 
-export const get = async (url, headers = {}) => {
+const request = async ({ method, path, body = {}, headers = {} }) => {
     try {
         return await (
-            await fetch(BASE_URL + url, {
+            await fetch(SERVER_URL + path, {
+                method,
+                body:
+                    Object.keys(body).length > 0 ? JSON.stringify(body) : null,
                 headers: {
-                    ...headers
-                }
+                    "Content-Type": "application/json",
+                    ...headers,
+                },
             })
         ).json();
     } catch (error) {
-        console.log("Error in GET :: ", error);
+        console.log(`Error (${method}) :: `, error);
         return { error: error };
     }
 };
 
-export const post = async (url, body, headers = {}) => {
-    try {
-        return await (
-            await fetch(BASE_URL + url, {
-                method: "POST",
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-Type": "application/json",
-                    ...headers
-                }
-            })
-        ).json();
-    } catch (error) {
-        console.log("Error in POST :: ", error);
-        return { error: error };
-    }
+export const get = async (path, headers) => {
+    return request({ method: "GET", path, headers });
 };
 
-export const deleteRequest = async (url, headers = {}) => {
-    try {
-        return await (
-            await fetch(BASE_URL + url, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    ...headers
-                }
-            })
-        ).json();
-    } catch (error) {
-        console.log("Error in POST :: ", error);
-        return { error: error };
-    }
+export const post = async (path, body, headers) => {
+    return request({ method: "POST", path, body, headers });
 };
 
-export const patch = async (url, body, headers = {}) => {
-    try {
-        return await (
-            await fetch(BASE_URL + url, {
-                method: "PATCH",
-                body: JSON.stringify(body),
-                headers: {
-                    "Content-Type": "application/json",
-                    ...headers
-                }
-            })
-        ).json();
-    } catch (error) {
-        console.log("Error in POST :: ", error);
-        return { error: error };
-    }
+export const deleteRequest = async (path, headers) => {
+    return request({ method: "DELETE", path, headers });
+};
+
+export const patch = async (path, body, headers) => {
+    return request({ method: "PATCH", path, body, headers });
 };
