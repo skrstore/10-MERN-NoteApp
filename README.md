@@ -1,4 +1,4 @@
-# ReactJS-TodoApp
+# ReactJS-NoteApp
 
 ## Notes
 
