@@ -100,26 +100,30 @@ export default class Notes extends Component {
 
     render() {
         return (
-            <div className="row p-0 m-0 h-100">
-                <div className="col-4 p-0 m-0 h-100 bg-white">
-                    <DataList
-                        data={this.state.notes}
-                        setActive={this.setActiveNote}
-                    />
-                </div>
-                <div className="col-8 row justify-content-center text-center align-items-center">
-                    {this.state.activeNote ? (
-                        <InputArea
-                            note={this.state.activeNote}
-                            isNewNote={this.state.isNewNote}
-                            handleNoteValueChange={this.handleNoteValueChange}
-                            handleNoteUpdate={this.handleNoteUpdate}
-                            handleNoteDelete={this.handleNoteDelete}
-                            addNewNoteToServer={this.addNewNoteToServer}
+            <div className="row pt-1 justify-content-center">
+                <div className="col-12 col-md-8 col-lg-6 row">
+                    <div className="col-4 p-0 m-0">
+                        <DataList
+                            data={this.state.notes}
+                            setActive={this.setActiveNote}
                         />
-                    ) : (
-                        <p>Select a Note from the List</p>
-                    )}
+                    </div>
+                    <div className="col-8 row justify-content-center text-center align-items-center">
+                        {this.state.activeNote ? (
+                            <InputArea
+                                note={this.state.activeNote}
+                                isNewNote={this.state.isNewNote}
+                                handleNoteValueChange={
+                                    this.handleNoteValueChange
+                                }
+                                handleNoteUpdate={this.handleNoteUpdate}
+                                handleNoteDelete={this.handleNoteDelete}
+                                addNewNoteToServer={this.addNewNoteToServer}
+                            />
+                        ) : (
+                            <p>Select a Note from the List</p>
+                        )}
+                    </div>
                 </div>
                 <div className="addNewBtnContainer">
                     <button

@@ -12,11 +12,10 @@ class Navbar extends Component {
         const username = localStorage.getItem("username");
         const isLogin = !!localStorage.getItem("auth_token");
         return (
-            <nav
-                className="navbar navbar-expand navbar-dark bg-dark"
-                style={this.props.style}
-            >
-                <span className="navbar-brand mb-0">{document.title}</span>
+            <nav className="navbar my-navbar">
+                <a href="/" className="navbar-brand mb-0">
+                    {document.title}
+                </a>
 
                 {isLogin && (
                     <div className="navbar-nav ml-auto">

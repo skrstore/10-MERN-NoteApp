@@ -1,9 +1,27 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-color: #eeeeee;
+    margin: 0;
+    height: 100vh;
 }
 
 .addNewBtnContainer {
     position: absolute;
     bottom: 1em;
     right: 1em;
+}
+
+.my-navbar {
+    background-color: black;
+    height: 4rem;
+    color: white;
+    box-shadow: 0 0 5px black;
+}
+
+.my-navbar a {
+    text-decoration: none;
+    color: white;
 }

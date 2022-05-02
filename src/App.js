@@ -27,7 +27,7 @@ export default class App extends Component {
     render() {
         return (
             <Router>
-                <Navbar style={{ height: "4rem" }} />
+                <Navbar />
                 <main className="container-fluid">
                     <Switch>
                         <PrivateRoute exact path="/">

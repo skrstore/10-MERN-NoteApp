@@ -38,9 +38,9 @@ export default class Register extends Component {
 
     render() {
         return (
-            <div className="row justify-content-center m-0 p-0">
-                <div className="col-10 col-md-8 py-4 row justify-content-center bg-white mt-4 rounded">
-                    <div className="col-12 text-center">
+            <div className="row justify-content-center">
+                <div className="col-10 col-md-6 col-lg-4 py-4 row justify-content-center bg-white mt-4 rounded">
+                    <div className="col-12 text-center mb-4">
                         <h3>Register, here</h3>
                     </div>
                     <form
@@ -51,16 +51,19 @@ export default class Register extends Component {
                         <InputField
                             name="username"
                             value={this.state.username}
+                            required
                             onChange={this.handleInputChange}
                         />
                         <InputField
                             name="email"
+                            required
                             value={this.state.email}
                             onChange={this.handleInputChange}
                             type="email"
                         />
                         <InputField
                             name="password"
+                            required
                             value={this.state.password}
                             onChange={this.handleInputChange}
                             type="password"

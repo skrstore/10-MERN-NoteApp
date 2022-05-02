@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 export default class InputField extends Component {
     render() {
-        const { name, type = "text", value, onChange } = this.props;
+        const { name, type = "text", value, onChange, ...rest } = this.props;
         return (
             <div className="form-group row align-items-center">
                 <label
@@ -18,6 +18,7 @@ export default class InputField extends Component {
                     className="form-control col-8"
                     value={value}
                     onChange={onChange}
+                    {...rest}
                 />
             </div>
         );

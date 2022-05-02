@@ -32,9 +32,9 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div className="row m-0 p-0 justify-content-center">
-                <div className="col-10 col-md-8 py-4 row justify-content-center bg-white mt-4 rounded">
-                    <div className="col-12 text-center">
+            <div className="row justify-content-center">
+                <div className="col-10 col-md-6 col-lg-4 py-4 row justify-content-center bg-white mt-4 rounded">
+                    <div className="col-12 text-center mb-4">
                         <h3>Login, here</h3>
                     </div>
                     <form
@@ -44,16 +44,18 @@ export default class Login extends Component {
                         <InputField
                             name="email"
                             value={this.state.email}
+                            required
                             onChange={this.handleInputChange}
                             type="email"
                         />
                         <InputField
                             name="password"
                             value={this.state.password}
+                            required
                             onChange={this.handleInputChange}
                             type="password"
                         />
-                        <div className="form-group row align-items-center justify-content-around mt-5">
+                        <div className="row justify-content-around mt-5 mb-3">
                             <button
                                 className="btn btn-outline-success"
                                 type="submit"
